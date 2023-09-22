@@ -1,0 +1,5 @@
+/home/luc/SectraCalculator/obj/Debug/net7.0/SimpleCalculator.Tests.csproj.AssemblyReference.cache
+/home/luc/SectraCalculator/obj/Debug/net7.0/SimpleCalculator.Tests.GeneratedMSBuildEditorConfig.editorconfig
+/home/luc/SectraCalculator/obj/Debug/net7.0/SimpleCalculator.Tests.AssemblyInfoInputs.cache
+/home/luc/SectraCalculator/obj/Debug/net7.0/SimpleCalculator.Tests.AssemblyInfo.cs
+/home/luc/SectraCalculator/obj/Debug/net7.0/SimpleCalculator.Tests.csproj.CoreCompileInputs.cache
