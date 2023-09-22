@@ -1,0 +1,15 @@
+/home/luc/SectraCalculator/SimpleCalculator/bin/Debug/net7.0/SimpleCalculator
+/home/luc/SectraCalculator/SimpleCalculator/bin/Debug/net7.0/SimpleCalculator.deps.json
+/home/luc/SectraCalculator/SimpleCalculator/bin/Debug/net7.0/SimpleCalculator.runtimeconfig.json
+/home/luc/SectraCalculator/SimpleCalculator/bin/Debug/net7.0/SimpleCalculator.dll
+/home/luc/SectraCalculator/SimpleCalculator/bin/Debug/net7.0/SimpleCalculator.pdb
+/home/luc/SectraCalculator/SimpleCalculator/obj/Debug/net7.0/SimpleCalculator.csproj.AssemblyReference.cache
+/home/luc/SectraCalculator/SimpleCalculator/obj/Debug/net7.0/SimpleCalculator.GeneratedMSBuildEditorConfig.editorconfig
+/home/luc/SectraCalculator/SimpleCalculator/obj/Debug/net7.0/SimpleCalculator.AssemblyInfoInputs.cache
+/home/luc/SectraCalculator/SimpleCalculator/obj/Debug/net7.0/SimpleCalculator.AssemblyInfo.cs
+/home/luc/SectraCalculator/SimpleCalculator/obj/Debug/net7.0/SimpleCalculator.csproj.CoreCompileInputs.cache
+/home/luc/SectraCalculator/SimpleCalculator/obj/Debug/net7.0/SimpleCalculator.dll
+/home/luc/SectraCalculator/SimpleCalculator/obj/Debug/net7.0/refint/SimpleCalculator.dll
+/home/luc/SectraCalculator/SimpleCalculator/obj/Debug/net7.0/SimpleCalculator.pdb
+/home/luc/SectraCalculator/SimpleCalculator/obj/Debug/net7.0/SimpleCalculator.genruntimeconfig.cache
+/home/luc/SectraCalculator/SimpleCalculator/obj/Debug/net7.0/ref/SimpleCalculator.dll
