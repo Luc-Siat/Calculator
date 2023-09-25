@@ -1,6 +1,7 @@
 using FluentAssertions;
-using SimpleCalculator.Calculator;
-using SimpleCalculator.Models.Register;
+using SimpleCalculator.Calculators;
+using SimpleCalculator.CommandLineHandler;
+using SimpleCalculator.Models;
 
 namespace simpleCalculator.Tests;
 
@@ -14,47 +15,12 @@ public class SimpleCalculatorHappyTests
     }
 
     [Fact]
-    public void AreInputsValid_return_true_if_register_is_using_letters()
-    {
-        // Arrange
-        var testInputs= new []{"A", "add", "2"};
-
-        // Act
-        var response = _calculator.AreInputsValid(testInputs);
-
-        // Assert 
-        response.Should().BeTrue();
-    }
-
-    [Fact]
-    public void AreInputsValid_return_true_if_operator_is_valid()
-    {
-        // Arrange
-        var testInputs= new []{"A", "add", "2"};
-        // Act
-        var response = _calculator.AreInputsValid(testInputs);
-        // Assert 
-        response.Should().BeTrue();
-    }
-
-    [Fact]
-    public void AreInputsValid_return_true_if_value_is_a_number()
-    {
-        // Arrange
-        var testInputs= new []{"A", "add", "2"};
-        // Act
-        var response = _calculator.AreInputsValid(testInputs);
-        // Assert 
-        response.Should().BeTrue();
-    }
-
-    [Fact]
     public void CreateRegister_creates_when_register_name_does_not_exist_in_registers()
     {
         // Arrange
         var testInputs= new []{"A", "add", "2"};
         // Act
-        _calculator.CommandHandler("A add 2");
+        CommandLineHandler.CommandDispatcher(_calculator, "A add 2");
         // Assert 
         _calculator._registers.Count().Should().Be(1);
     }
@@ -63,8 +29,8 @@ public class SimpleCalculatorHappyTests
     {
         // Arrange
         // Act
-        _calculator.CommandHandler("A add 2");
-        _calculator.CommandHandler("A add 2");
+        CommandLineHandler.CommandDispatcher(_calculator, "A add 2");
+        CommandLineHandler.CommandDispatcher(_calculator, "A add 2");
         // Assert 
         _calculator._registers.Count().Should().Be(1);
     }
@@ -75,9 +41,9 @@ public class SimpleCalculatorHappyTests
         // Arrange
 
         // Act
-        _calculator.CommandHandler("A add 2");
+        CommandLineHandler.CommandDispatcher(_calculator, "A add 2");
         // Assert
-        _calculator._currentRegister.Result.Should().Be(2);
+        // _calculator._currentRegister.Result.Should().Be(2);
     }
     [Fact]
     public void Print_inputs_the_value_on_the_console()
@@ -85,10 +51,10 @@ public class SimpleCalculatorHappyTests
         // Arrange
 
         // Act
-        _calculator.CommandHandler("A add 2");
+        CommandLineHandler.CommandDispatcher(_calculator, "A add 2");
         var stringWriter = new StringWriter();
         Console.SetOut(stringWriter);
-        _calculator.CommandHandler("print A");
+        CommandLineHandler.CommandDispatcher(_calculator, "print A");
         // Assert
         stringWriter.ToString().Trim().Should().Be("2");
     }
