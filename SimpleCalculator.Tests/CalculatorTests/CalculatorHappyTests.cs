@@ -18,7 +18,6 @@ public class CalculatorHappyTests
     public void SetRegister_creates_when_register_name_does_not_exist_in_registers()
     {
         // Arrange
-        var testInputs= new []{"A", "add", "2"};
         // Act
         CommandLineHandler.CommandDispatcher(_calculator, "A add 2");
         // Assert 
@@ -35,20 +34,5 @@ public class CalculatorHappyTests
         _calculator._registers.Count().Should().Be(1);
     }
 
-    [Fact]
-    public void Print_inputs_the_value_on_the_console()
-    {
-        // Arrange
-
-        // Act
-        CommandLineHandler.CommandDispatcher(_calculator, "A add 2");
-        var stringWriter = new StringWriter();
-        Console.SetOut(stringWriter);
-        CommandLineHandler.CommandDispatcher(_calculator, "print A");
-        // Assert
-        stringWriter.ToString().Trim().Contains("2");
-        stringWriter.ToString().Trim().Contains("A");
-    }
-
-
+ 
 }

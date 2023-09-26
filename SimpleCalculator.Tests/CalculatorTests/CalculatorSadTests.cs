@@ -19,5 +19,16 @@ public class CalculatorSadTests
         // Assert 
         _calculator._registers.Count().Should().Be(1);
     }
+    [Fact]
+    public void CommandDispatcher_Should_return_Print_command_not_valid_if_input_is_not_2_or_3()
+    {
+        // Arrange
+        var input = "a ada 2 4";
+        var stringWriter = new StringWriter();
+        Console.SetOut(stringWriter);
+        CommandLineHandler.CommandDispatcher(_calculator, input);        
+        // Assert 
+        stringWriter.ToString().Trim().Should().Be("a ada 2 4 Command not in a valid format, please try again");
+    }
 
 }

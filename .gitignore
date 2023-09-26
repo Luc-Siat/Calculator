@@ -1,2 +1,8 @@
 obj/
 bin/
+SimpleCalculator.Tests/bin/Debug/net7.0/SimpleCalculator.Tests.dll
+SimpleCalculator.Tests/bin/Debug/net7.0/SimpleCalculator.Tests.pdb
+.gitignore
+SimpleCalculator.Tests/obj/Debug/net7.0/SimpleCalculator.Tests.pdb
+SimpleCalculator.Tests/obj/Debug/net7.0/ref/SimpleCalculator.Tests.dll
+SimpleCalculator.Tests/obj/Debug/net7.0/refint/SimpleCalculator.Tests.dll

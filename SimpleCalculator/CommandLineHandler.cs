@@ -94,7 +94,6 @@ public static class CommandLineHandler
           {
               Calculator.OperationHandler(currentCommand);
           }
-
           return;
       } 
 
