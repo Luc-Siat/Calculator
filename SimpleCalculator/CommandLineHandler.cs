@@ -33,11 +33,11 @@ public static class CommandLineHandler
   {
     var command = "";
     Console.WriteLine("Input your command:");
-    while (command is not "quit" && command is not null)
+    while (command is not "quit")
     {
       Console.Write("-");
       command = Console.ReadLine();
-      if (command is not "quit")
+      if (command is not "quit" && command is not null)
       {
         try
         {
