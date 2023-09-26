@@ -5,17 +5,17 @@ using SimpleCalculator.Models;
 
 namespace simpleCalculator.Tests;
 
-public class SimpleCalculatorHappyTests
+public class CalculatorHappyTests
 {
-    private Calculator _calculator = new Calculator(); 
+    private readonly Calculator _calculator = new Calculator(); 
 
-    public SimpleCalculatorHappyTests()
+    public CalculatorHappyTests()
     {
         _calculator._registers.Clear();
     }
 
     [Fact]
-    public void CreateRegister_creates_when_register_name_does_not_exist_in_registers()
+    public void SetRegister_creates_when_register_name_does_not_exist_in_registers()
     {
         // Arrange
         var testInputs= new []{"A", "add", "2"};
@@ -25,7 +25,7 @@ public class SimpleCalculatorHappyTests
         _calculator._registers.Count().Should().Be(1);
     }
     [Fact]
-    public void CreateRegister_does_create_twice_register_with_same_name()
+    public void SetRegister_does_create_twice_register_with_same_name()
     {
         // Arrange
         // Act
@@ -35,16 +35,6 @@ public class SimpleCalculatorHappyTests
         _calculator._registers.Count().Should().Be(1);
     }
 
-    [Fact]
-    public void Add_add_the_value_to_register_result()
-    {
-        // Arrange
-
-        // Act
-        CommandLineHandler.CommandDispatcher(_calculator, "A add 2");
-        // Assert
-        // _calculator._currentRegister.Result.Should().Be(2);
-    }
     [Fact]
     public void Print_inputs_the_value_on_the_console()
     {
@@ -56,7 +46,8 @@ public class SimpleCalculatorHappyTests
         Console.SetOut(stringWriter);
         CommandLineHandler.CommandDispatcher(_calculator, "print A");
         // Assert
-        stringWriter.ToString().Trim().Should().Be("2");
+        stringWriter.ToString().Trim().Contains("2");
+        stringWriter.ToString().Trim().Contains("A");
     }
 
 

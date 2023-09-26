@@ -1,4 +1,3 @@
-using System.Collections;
 using SimpleCalculator.Models;
 using SimpleCalculator.Calculators;
 
@@ -79,7 +78,7 @@ public static class CommandLineHandler
 
       if (inputs[0] == "print")
       {
-          var currentCommand = createPrintCommand(calculator, inputs);
+          var currentCommand = CreatePrintCommand(calculator, inputs);
           if (currentCommand is not null)
           {
               calculator.Print(currentCommand.Register);
@@ -89,7 +88,7 @@ public static class CommandLineHandler
 
       else if (inputs.Count() is 3)
       {
-          var currentCommand = createOperationCommand(calculator, inputs);
+          var currentCommand = CreateOperationCommand(calculator, inputs);
 
           if (currentCommand is not null)
           {
@@ -102,7 +101,7 @@ public static class CommandLineHandler
       Console.WriteLine($"{input} Command not in a valid format, please try again");      
   }
 
-  public static PrintCommand? createPrintCommand(Calculator calculator, string[] inputs)
+  public static PrintCommand? CreatePrintCommand(Calculator calculator, string[] inputs)
   {
       if (inputs.Count() is not 2 )
       {
@@ -123,7 +122,7 @@ public static class CommandLineHandler
       };
   }
 
-  public static OperationCommand? createOperationCommand(Calculator calculator, string[] inputs)
+  public static OperationCommand? CreateOperationCommand(Calculator calculator, string[] inputs)
   {
       if (inputs[0].All(Char.IsLetter) is false)
       {
@@ -134,7 +133,7 @@ public static class CommandLineHandler
       var validOperators = new string[] { "add", "multiply", "subtract" };
       if (validOperators.Contains(inputs[1]) is false)
       {
-          Console.WriteLine("register name can only contain letters");
+          Console.WriteLine("register name can only contain add, multiply and subtract");
           return null;
       };
 
@@ -157,12 +156,5 @@ public static class CommandLineHandler
           command.Value = int.Parse(inputs[2]);
       }
       return command;
-  }
-
-  public static bool AreInputsValid(string[] inputs)
-  {
-      // improve to get a better error log, check for length and reverse the check if so?
-      var validOperators = new string[] { "add", "multiply", "subtract" };
-      return inputs[0].All(Char.IsLetter) && validOperators.Contains(inputs[1]);
   }
 }
