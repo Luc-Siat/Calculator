@@ -17,15 +17,15 @@ public static class CommandLineHandler
 
     switch (choice)
     {
-      case "file" : 
+      case "file":
         FileHandler(calculator);
         break;
-      case "cli" : 
+      case "cli":
         ManualCommandHandler(calculator);
         break;
-      default: 
+      default:
         Start();
-        break; 
+        break;
     };
   }
 
@@ -39,121 +39,132 @@ public static class CommandLineHandler
       command = Console.ReadLine();
       if (command is not "quit")
       {
-        CommandDispatcher(calculator, command);
+        try
+        {
+          CommandDispatcher(calculator, command);
+        }
+        catch (Exception e)
+        {
+          Console.WriteLine(e.Message);
+        }
       }
     }
 
     Console.WriteLine("Thank you for using the simple calculator! \nHave a nice Day");
   }
 
-    public static void FileHandler(Calculator calculator)
+  public static void FileHandler(Calculator calculator)
   {
     Console.WriteLine("Put your file in the Files folder then write your filename here:");
     Console.Write("-");
 
-    try  {
+    try
+    {
 
       var filename = Console.ReadLine();
       var lines = File.ReadAllLines($"./Files/{filename}.txt");
-      foreach ( var line in lines)
+      foreach (var line in lines)
       {
         Console.WriteLine(line);
-        CommandDispatcher(calculator, line);
+        try
+        {
+          CommandDispatcher(calculator, line);
+        }
+        catch (Exception e)
+        {
+          Console.WriteLine(e.Message);
+        }
       }
 
     }
-    catch(Exception e)
+    catch (Exception e)
     {
-        Console.WriteLine("Exception: " + e.Message);
+      Console.WriteLine("Exception: " + e.Message);
     }
     finally
     {
-        Console.WriteLine("Exiting. \nThank you for using the simple calculator! \nHave a nice Day");
+      Console.WriteLine("Exiting. \nThank you for using the simple calculator! \nHave a nice Day");
     }
   }
 
   public static void CommandDispatcher(Calculator calculator, string input)
   {
-      var inputs = input.ToLower().Split(" ");
+    var inputs = input.ToLower().Split(" ");
 
-      if (inputs[0] == "print")
-      {
-          var currentCommand = CreatePrintCommand(calculator, inputs);
-          if (currentCommand is not null)
-          {
-              calculator.Print(currentCommand.Register);
-          }
-          return;
-      }
+    if (inputs[0] == "print")
+    {
+      var currentCommand = CreatePrintCommand(calculator, inputs);
 
-      else if (inputs.Count() is 3)
-      {
-          var currentCommand = CreateOperationCommand(calculator, inputs);
+      var printMessage = calculator.Print(currentCommand.Register);
 
-          if (currentCommand is not null)
-          {
-              Calculator.OperationHandler(currentCommand);
-          }
-          return;
-      } 
+      Console.WriteLine(printMessage);
+    }
 
-      Console.WriteLine($"{input} Command not in a valid format, please try again");      
+
+    else if (inputs.Count() is 3)
+    {
+      var currentCommand = CreateOperationCommand(calculator, inputs);
+
+      Calculator.OperationHandler(currentCommand);
+    }
+    else
+    {
+      Console.WriteLine($"{input} Command not in a valid format, please try again");
+    }
   }
 
-  public static PrintCommand? CreatePrintCommand(Calculator calculator, string[] inputs)
+  public static PrintCommand CreatePrintCommand(Calculator calculator, string[] inputs)
   {
-      if (inputs.Count() is not 2 )
-      {
-          Console.WriteLine($"Print command is too long");
-          return null;
-      }
+    if (inputs.Count() is not 2)
+    {
+      throw new Exception("Print command too long");
+    }
 
-      if (calculator.RegisterExist(inputs[1]) is false)
-      {
-          Console.WriteLine($"{inputs[1]} is not an existing register, please use this register before printing it");
-          return null;
-      }
+    if (calculator.RegisterExist(inputs[1]) is false)
+    {
+      throw new Exception($"{inputs[1]} is not an existing register, please use this register before printing it");
+    }
 
-      var register = calculator.SetRegister(inputs[1]);
+    var register = calculator.SetRegister(inputs[1]);
 
-      return new PrintCommand(){
-          Register = register,
-      };
+    return new PrintCommand()
+    {
+      Register = register,
+    };
   }
 
-  public static OperationCommand? CreateOperationCommand(Calculator calculator, string[] inputs)
+  public static OperationCommand CreateOperationCommand(Calculator calculator, string[] inputs)
   {
-      if (inputs[0].All(Char.IsLetter) is false)
-      {
-          Console.WriteLine("register name can only contain letters");
-          return null;
-      };
+    if (inputs[0].All(Char.IsLetter) is false)
+    {
+      throw new Exception("register name can only contain letters");
 
-      var validOperators = new string[] { "add", "multiply", "subtract" };
-      if (validOperators.Contains(inputs[1]) is false)
-      {
-          Console.WriteLine("register name can only contain add, multiply and subtract");
-          return null;
-      };
+    };
 
+    var validOperators = new string[] { "add", "multiply", "subtract" };
+    if (validOperators.Contains(inputs[1]) is false)
+    {
+      throw new Exception("register name can only contain add, multiply and subtract");
+    };
 
 
-      var command = new OperationCommand
-      {
-          Register = calculator.SetRegister(inputs[0]),
-          Operation = inputs[1]
-      };
 
-      if (inputs[2].Any(Char.IsLetter))
-      {
-          calculator.SetRegister(inputs[2]);
-          command.RegisterToLink = inputs[2];
-          command.Register.linkedRegisters.Add(command.RegisterToLink, command.Operation);
-      }
-      else
-      {
-          command.Value = int.Parse(inputs[2]);
-      }
-      return command;
+    var command = new OperationCommand
+    {
+      Register = calculator.SetRegister(inputs[0]),
+      Operation = inputs[1]
+    };
+
+    if (inputs[2].Any(Char.IsLetter))
+    {
+      calculator.SetRegister(inputs[2]);
+      command.RegisterToLink = inputs[2];
+      command.Register.linkedRegisters.Add(command.RegisterToLink, command.Operation);
+    }
+    else
+    {
+      command.Value = int.Parse(inputs[2]);
+    }
+    return command;
   }
 }

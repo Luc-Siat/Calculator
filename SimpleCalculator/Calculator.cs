@@ -41,13 +41,13 @@ public class Calculator
         register.Result *= currentValue;
     }
 
-    public void Print(Register register)
+    public string Print(Register register)
     {
         if (register.linkedRegisters.Count is not 0)
         {
             ProcessLinkedRegisters(register);
         }
-        Console.WriteLine($"--- {register.Name} total is {register!.Result} ---".ToUpper());
+        return $"--- {register.Name} total is {register!.Result} ---".ToUpper();
     }
 
     public void ProcessLinkedRegisters(Register register)
